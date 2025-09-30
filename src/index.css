@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-100 text-gray-800 font-sans;
+}
+
+/* Floating + rotation animation for badges */
+@keyframes floatRotate {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+  75% { transform: translateY(-5px) rotate(-2deg); }
+}
+.animate-float-rotate { animation: floatRotate 3s ease-in-out infinite; }
+
+/* Shimmer gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hover-gradient-animate {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+.float-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* Floating badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(3deg); }
+}
+.float-badge { animation: float 3s ease-in-out infinite; }
+
+/* Highlights card items hover */
+.highlight-item {
+  @apply transition-all duration-300 transform hover:scale-105 hover:text-blue-600 hover:font-semibold;
+}
+
+/* Buttons hover pop effect */
+.button-hover {
+  @apply transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+}
+
+/* Profile card shimmer */
+.profile-shimmer {
+  @apply absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-50 transition-opacity duration-700 animate-pulse bg-gradient-to-br from-blue-100 via-transparent to-purple-100;
+}
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.group-hover\:animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.group-hover\:animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+/* Neon pulse animation */
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 5px var(--tw-gradient-to), 0 0 10px var(--tw-gradient-to); }
+  50% { box-shadow: 0 0 15px var(--tw-gradient-to), 0 0 25px var(--tw-gradient-to); }
+}
+
+.float-badge {
+  animation: float 3s ease-in-out infinite, neonPulse 2s ease-in-out infinite;
+}
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+/* Neon pulse + float animation for badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(3deg); }
+}
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 5px var(--tw-gradient-to), 0 0 10px var(--tw-gradient-to); }
+  50% { box-shadow: 0 0 15px var(--tw-gradient-to), 0 0 25px var(--tw-gradient-to); }
+}
+
+.float-badge {
+  animation: float 3s ease-in-out infinite, neonPulse 2s ease-in-out infinite;
+}
+
+/* Gradient bar floating effect */
+@keyframes floatGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.float-gradient {
+  background-size: 200% 200%;
+  animation: floatGradient 8s ease-in-out infinite;
+}/* Hover shimmer intensifies */
+.group:hover .animate-shimmer {
+  opacity: 0.3;
+}
+
+/* Skill bar hover glow */
+.group-hover\:brightness-110:hover {
+  filter: brightness(1.1);
+}
+/* Neon Badge Pulse */
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px #00f; }
+  50% { box-shadow: 0 0 8px #fff, 0 0 20px #fff, 0 0 40px #00f; }
+}
+
+.neon-badge {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+/* Shimmer effect for progress bar */
+@keyframes shimmer {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
+
+.animate-shimmer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+.hover\:glow-neon:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.neon-badge {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.4);
+}
+.hover\:glow-neon:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.neon-badge {
+  animation: gradientGlow 2s infinite alternate;
+}
+
+@keyframes gradientGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255,255,255,0.6), 0 0 10px rgba(255,255,255,0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255,255,255,0.6), 0 0 10px rgba(255,255,255,0.4);
+  }
+}
+
+/* Shimmer for bars */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}/* Pulsing / floating badges */
+.float-badge {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Floating gradient bar effect */
+.float-gradient {
+  background-size: 200% 200%;
+  animation: floatGradient 8s ease-in-out infinite;
+}
+
+@keyframes floatGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* Pulsing / floating badges */
+.float-badge {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Hover pulse glow for badges */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 5px rgba(255,255,255,0.3); transform: scale(1); }
+  50% { box-shadow: 0 0 15px rgba(255,255,255,0.7); transform: scale(1.2); }
+  100% { box-shadow: 0 0 5px rgba(255,255,255,0.3); transform: scale(1); }
+}
+
+.group-hover\:animate-pulse-glow:hover {
+  animation: pulseGlow 1s infinite;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Floating gradient bar effect */
+.float-gradient {
+  background-size: 200% 200%;
+  animation: floatGradient 8s ease-in-out infinite;
+}
+
+@keyframes floatGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* Shimmer gradient animation for skill bars */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.float-gradient {
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+/* Shimmer gradient animation for skill bars */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.float-gradient {
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* Floating badge animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(3deg); }
+}
+
+.float-badge {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse on hover */
+.group-hover\:animate-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+
