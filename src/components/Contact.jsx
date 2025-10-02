@@ -1,88 +1,275 @@
-import React from "react";
-import { FaTelegramPlane, FaYoutube, FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import React, { useState } from "react";
 
-function Contact() {
-  const socials = [
-    {
-      name: "Telegram",
-      url: "https://t.me/@zeberling",
-      icon: <FaTelegramPlane size={20} />,
-      bgHover: "hover:bg-sky-50 hover:border-sky-200 text-sky-600",
-    },
-    {
-      name: "YouTube",
-      url: "https://www.youtube.com/@Amerawi",
-      icon: <FaYoutube size={20} />,
-      bgHover: "hover:bg-red-50 hover:border-red-200 text-red-600",
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/guashberheambera",
-      icon: <FaLinkedin size={20} />,
-      bgHover: "hover:bg-blue-50 hover:border-blue-200 text-blue-700",
-    },
-    {
-      name: "GitHub",
-      url: "https://github.com/mercy143",
-      icon: <FaGithub size={20} />,
-      bgHover: "hover:bg-gray-50 hover:border-gray-200 text-gray-900",
-    },
-  ];
+export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [feedbackStatus, setFeedbackStatus] = useState("");
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } else setStatus("❌ Failed to send message.");
+    } catch {
+      setStatus("⚠️ Error sending message.");
+    }
+  };
+
+  const handleFeedbackSubmit = async (e) => {
+    e.preventDefault();
+    if (feedback.trim() === "") {
+      alert("Feedback cannot be empty.");
+      return;
+    }
+    try {
+      const res = await fetch("http://localhost:5000/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feedback }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFeedbackStatus("✅ Feedback submitted successfully!");
+        setFeedback("");
+        setFeedbackOpen(false);
+      } else setFeedbackStatus("❌ Failed to submit feedback.");
+    } catch {
+      setFeedbackStatus("⚠️ Error submitting feedback.");
+    }
+  };
+
+  const handleCancelFeedback = () => {
+    if (feedback.trim() !== "") {
+      const confirmCancel = window.confirm(
+        "Are you sure you want to cancel? Your feedback will be lost."
+      );
+      if (!confirmCancel) return;
+    }
+    setFeedbackOpen(false);
+    setFeedback("");
+  };
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) handleCancelFeedback();
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start py-20">
-      <div className="max-w-xl w-full p-8 bg-white rounded-2xl shadow-xl border border-gray-200">
-        <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center">Contact Me</h2>
+    <div className="relative p-6 max-w-lg mx-auto">
+      <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 animate-pulse opacity-30 blur-3xl"></div>
+
+      <div className="relative z-10 bg-white rounded-3xl shadow-xl p-8 flex flex-col gap-6 hover:shadow-pink-400/50 transition-shadow duration-500">
+        <h2 className="text-3xl font-bold text-center text-gray-900">Contact Me</h2>
 
         {/* Contact Info */}
-        <div className="mb-6 space-y-3">
-          <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-blue-50 transition cursor-pointer">
-            <FaEnvelope className="text-blue-600" />
-            <a href="mailto:guashberhe2019@gmail.com" className="text-gray-800 font-medium underline">
-              guashberhe2019@gmail.com
-            </a>
-          </div>
-          <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-green-50 transition cursor-pointer">
-            <FaPhone className="text-green-600" />
-            <a href="tel:+251932330844" className="text-gray-800 font-medium underline">
-              +251932330844
-            </a>
-          </div>
-          <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-yellow-50 transition cursor-pointer">
-            <FaMapMarkerAlt className="text-yellow-600" />
-            <span className="text-gray-800 font-medium">Ministry of Revenue, Ethiopia</span>
-          </div>
-        </div>
-
-        {/* Socials */}
-        <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Socials</h3>
-        <div className="flex flex-wrap justify-center gap-4">
-          {socials.map((social, idx) => (
+        <div className="flex flex-col gap-3 mb-4 text-gray-700">
+          <div className="flex items-center gap-2">
+            {/* Location icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 22s8-4.5 8-10c0-4.418-3.582-8-8-8s-8 3.582-8 8c0 5.5 8 10 8 10z"
+              />
+            </svg>
             <a
-              key={idx}
-              href={social.url}
+              href="https://www.google.com/maps?q=MoR"
               target="_blank"
               rel="noreferrer"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg border bg-white transition transform hover:scale-110 hover:-translate-y-1 ${social.bgHover}`}
-              aria-label={social.name}
+              className="hover:text-green-600 transition"
             >
-              {social.icon}
-              <span>{social.name}</span>
+              Location: Ministry of Revenue Ethiopia
             </a>
-          ))}
+          </div>
+          <div className="flex items-center gap-2">
+            {/* Email icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            <a
+              href="mailto:guashberhe2019@gmail.com"
+              className="hover:text-green-600 transition"
+            >
+              Email: guashberhe2019@gmail.com
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            {/* Phone icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.019 3.056a1 1 0 01-.216 1.03L8.414 9.414a16.011 16.011 0 007.172 7.172l1.654-1.654a1 1 0 011.03-.216l3.056 1.019a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C7.373 21 3 16.627 3 11V5z"
+              />
+            </svg>
+            <a href="tel:+251932330844" className="hover:text-green-600 transition">
+              Phone: +251932330844
+            </a>
+          </div>
         </div>
 
-        {/* Optional: Smooth hover animation */}
-        <style>
-          {`
-            .hover\\:-translate-y-1 {
-              transition: transform 0.3s ease;
-            }
-          `}
-        </style>
+        {/* Contact Form */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your full Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
+            rows="4"
+            className="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-500 transition transform hover:scale-105 hover:shadow-lg"
+          >
+            Send Message
+          </button>
+        </form>
+
+        {status && (
+          <p
+            className={`text-center font-medium ${
+              status.includes("✅")
+                ? "text-green-600"
+                : status.includes("❌")
+                ? "text-red-600"
+                : "text-yellow-600"
+            }`}
+          >
+            {status}
+          </p>
+        )}
+
+        {/* Feedback Button */}
+        <button
+          onClick={() => setFeedbackOpen(true)}
+          className="bg-pink-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-pink-600 transition transform hover:scale-105 self-center"
+        >
+          Give Feedback
+        </button>
+
+        {/* Feedback Modal */}
+        {feedbackOpen && (
+          <div
+            className="fixed inset-0 flex items-end justify-center z-50 bg-black/40"
+            onClick={handleOverlayClick}
+          >
+            <div className="bg-white rounded-t-3xl p-6 w-full max-w-md shadow-lg relative transform transition-transform duration-500 animate-slide-up">
+              <h3 className="text-xl font-bold mb-4 text-gray-900">Your Feedback</h3>
+              <textarea
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="Write your feedback..."
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 transition mb-4"
+                rows="5"
+              />
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={handleCancelFeedback}
+                  className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleFeedbackSubmit}
+                  className="px-4 py-2 rounded-lg bg-pink-500 text-white hover:bg-pink-600 transition"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {feedbackStatus && (
+          <p
+            className={`text-center font-medium ${
+              feedbackStatus.includes("✅")
+                ? "text-green-600"
+                : feedbackStatus.includes("❌")
+                ? "text-red-600"
+                : "text-yellow-600"
+            }`}
+          >
+            {feedbackStatus}
+          </p>
+        )}
       </div>
+
+      {/* Tailwind Animation */}
+      <style>
+        {`
+          @keyframes slide-up {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+          }
+          .animate-slide-up {
+            animation: slide-up 0.4s ease-out forwards;
+          }
+        `}
+      </style>
     </div>
   );
 }
-
-export default Contact;
