@@ -5,11 +5,13 @@ const skills = [
   { name: "React", percent: 85, color: "from-blue-400 to-purple-500" },
   { name: "JavaScript", percent: 90, color: "from-yellow-400 to-orange-500" },
   { name: "TailwindCSS", percent: 80, color: "from-teal-400 to-cyan-500" },
-  { name: "Python", percent: 75, color: "from-green-400 to-blue-500" },
+  { name: "Python $ AI", percent: 85, color: "from-green-400 to-blue-500" },
   { name: "Flutter", percent: 70, color: "from-indigo-400 to-purple-500" },
   { name: "Android", percent: 90, color: "from-green-500 to-emerald-600" },
   { name: "Firebase Integration", percent: 85, color: "from-yellow-300 to-orange-400" },
   { name: "API Integration", percent: 90, color: "from-pink-400 to-purple-500" },
+  {name : "figma Design", percent: 70, color: "from-purple-400 to-pink-500" }
+
 ];
 
 function Skill() {

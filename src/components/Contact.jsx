@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -17,7 +16,6 @@ export default function Contact() {
   const [feedbackStatus, setFeedbackStatus] = useState("");
   const feedbackRef = useRef(null);
 
-  // Autofocus feedback textarea
   useEffect(() => {
     if (feedbackOpen) feedbackRef.current?.focus();
   }, [feedbackOpen]);
@@ -34,7 +32,7 @@ export default function Contact() {
       return;
     }
 
-    // Optional: Email format validation
+    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus("⚠️ Invalid email format.");
@@ -46,17 +44,18 @@ export default function Contact() {
 
     const templateParams = {
       from_name: formData.name,
-      from_email: formData.email,
-      phone: formData.phone,
+      reply_to: formData.email, // ensures replies go to user
+      email: formData.email,
+      phone: formData.phone || "Not provided",
       message: formData.message,
     };
 
     try {
       await emailjs.send(
-        "service_abc123",
-        "template_6q2szc8",
+        "service_abc123",      // your EmailJS service ID
+        "template_6q2szc8",    // your EmailJS template ID
         templateParams,
-        "noigK-fejzo60tBgW"
+        "noigK-fejzo60tBgW"   // your EmailJS public key
       );
       setStatus("✅ Message sent successfully!");
       setFormData({ name: "", email: "", phone: "", message: "" });
@@ -76,8 +75,7 @@ export default function Contact() {
     }
 
     try {
-      // Simulate async API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500)); // simulate async API
       setFeedbackStatus("✅ Feedback submitted successfully!");
       setFeedback("");
       setFeedbackOpen(false);

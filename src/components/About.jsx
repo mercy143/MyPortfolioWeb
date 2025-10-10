@@ -60,7 +60,8 @@ function About() {
                   "Clean architecture and maintainable code",
                   "Problem solving and debugging",
                   "Performance-minded and UX-focused",
-                  "Team collaboration and communication"
+                  "Team collaboration and communication",
+                  "Self Motivated and quick learner"
                 ].map((item, idx) => (
                   <li
                     key={idx}
