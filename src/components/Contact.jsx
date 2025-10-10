@@ -1,7 +1,6 @@
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,21 +10,39 @@ export default function Contact() {
     message: "",
   });
   const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [feedbackStatus, setFeedbackStatus] = useState("");
+  const feedbackRef = useRef(null);
+
+  // Autofocus feedback textarea
+  useEffect(() => {
+    if (feedbackOpen) feedbackRef.current?.focus();
+  }, [feedbackOpen]);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     if (!formData.name || !formData.email || !formData.message) {
       setStatus("⚠️ Please fill all required fields.");
       return;
     }
+
+    // Optional: Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus("⚠️ Invalid email format.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus("Sending...");
 
     const templateParams = {
       from_name: formData.name,
@@ -34,24 +51,21 @@ export default function Contact() {
       message: formData.message,
     };
 
-    emailjs
-      .send(
-        "guash@143", // e.g., service_xxx
-        "guash@143", // e.g., template_xxx
+    try {
+      await emailjs.send(
+        "service_abc123",
+        "template_6q2szc8",
         templateParams,
-        "noigK-fejzo60tBgW" // e.g., n9eXyz1234abcd
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setStatus("✅ Message sent successfully!");
-          setFormData({ name: "", email: "", phone: "", message: "" });
-        },
-        (error) => {
-          console.error(error.text);
-          setStatus("❌ Failed to send message. Try again later.");
-        }
+        "noigK-fejzo60tBgW"
       );
+      setStatus("✅ Message sent successfully!");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error(error);
+      setStatus("❌ Failed to send message. Try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleFeedbackSubmit = async (e) => {
@@ -62,11 +76,13 @@ export default function Contact() {
     }
 
     try {
+      // Simulate async API call
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setFeedbackStatus("✅ Feedback submitted successfully!");
       setFeedback("");
       setFeedbackOpen(false);
     } catch {
-      setFeedbackStatus("⚠️ Error submitting feedback.");
+      setFeedbackStatus("❌ Error submitting feedback.");
     }
   };
 
@@ -94,6 +110,7 @@ export default function Contact() {
 
         {/* Contact Info */}
         <div className="flex flex-col gap-3 mb-4 text-gray-700">
+          {/* Location */}
           <div className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -123,6 +140,8 @@ export default function Contact() {
               Location: Ministry of Revenue Ethiopia
             </a>
           </div>
+
+          {/* Email */}
           <div className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +164,8 @@ export default function Contact() {
               Email: guashberhe2019@gmail.com
             </a>
           </div>
+
+          {/* Phone */}
           <div className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +181,10 @@ export default function Contact() {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.019 3.056a1 1 0 01-.216 1.03L8.414 9.414a16.011 16.011 0 007.172 7.172l1.654-1.654a1 1 0 011.03-.216l3.056 1.019a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C7.373 21 3 16.627 3 11V5z"
               />
             </svg>
-            <a href="tel:+251932330844" className="hover:text-green-600 transition">
+            <a
+              href="tel:+251932330844"
+              className="hover:text-green-600 transition"
+            >
               Phone: +251932330844
             </a>
           </div>
@@ -205,9 +229,12 @@ export default function Contact() {
           />
           <button
             type="submit"
-            className="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-500 transition transform hover:scale-105 hover:shadow-lg"
+            disabled={isSubmitting}
+            className={`bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-lg font-semibold transition transform hover:scale-105 hover:shadow-lg ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:from-green-600 hover:to-green-500"
+            }`}
           >
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </button>
         </form>
 
@@ -242,6 +269,7 @@ export default function Contact() {
             <div className="bg-white rounded-t-3xl p-6 w-full max-w-md shadow-lg relative transform transition-transform duration-500 animate-slide-up">
               <h3 className="text-xl font-bold mb-4 text-gray-900">Your Feedback</h3>
               <textarea
+                ref={feedbackRef}
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="Write your feedback..."
@@ -288,7 +316,7 @@ export default function Contact() {
             100% { transform: translateY(0); }
           }
           .animate-slide-up {
-            animation: slide-up 0.4s ease-out forwards;
+            animation: slide-up 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
           }
         `}
       </style>
