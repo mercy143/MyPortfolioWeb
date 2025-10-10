@@ -36,10 +36,10 @@ export default function Contact() {
 
     emailjs
       .send(
-        "YOUR_SERVICE_ID", // e.g., service_xxx
-        "YOUR_TEMPLATE_ID", // e.g., template_xxx
+        "guash@143", // e.g., service_xxx
+        "guash@143", // e.g., template_xxx
         templateParams,
-        "YOUR_PUBLIC_KEY" // e.g., n9eXyz1234abcd
+        "noigK-fejzo60tBgW" // e.g., n9eXyz1234abcd
       )
       .then(
         (result) => {
