@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {   } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const skills = [
   { name: "React", percent: 85, color: "from-blue-400 to-purple-500" },

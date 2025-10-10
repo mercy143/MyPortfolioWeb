@@ -38,7 +38,7 @@ function App() {
             <Journey />
           </section>
 
-          <section id="hobby" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id=" My hobby" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
             <Hobby />
           </section>
 

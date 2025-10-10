@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
   const [status, setStatus] = useState("");
 
   const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -11,22 +19,39 @@ export default function Contact() {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setStatus("✅ Message sent successfully!");
-        setFormData({ name: "", email: "", message: "" });
-      } else setStatus("❌ Failed to send message.");
-    } catch {
-      setStatus("⚠️ Error sending message.");
+
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("⚠️ Please fill all required fields.");
+      return;
     }
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
+
+    emailjs
+      .send(
+        "YOUR_SERVICE_ID", // e.g., service_xxx
+        "YOUR_TEMPLATE_ID", // e.g., template_xxx
+        templateParams,
+        "YOUR_PUBLIC_KEY" // e.g., n9eXyz1234abcd
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setStatus("✅ Message sent successfully!");
+          setFormData({ name: "", email: "", phone: "", message: "" });
+        },
+        (error) => {
+          console.error(error.text);
+          setStatus("❌ Failed to send message. Try again later.");
+        }
+      );
   };
 
   const handleFeedbackSubmit = async (e) => {
@@ -35,18 +60,11 @@ export default function Contact() {
       alert("Feedback cannot be empty.");
       return;
     }
+
     try {
-      const res = await fetch("http://localhost:5000/feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feedback }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setFeedbackStatus("✅ Feedback submitted successfully!");
-        setFeedback("");
-        setFeedbackOpen(false);
-      } else setFeedbackStatus("❌ Failed to submit feedback.");
+      setFeedbackStatus("✅ Feedback submitted successfully!");
+      setFeedback("");
+      setFeedbackOpen(false);
     } catch {
       setFeedbackStatus("⚠️ Error submitting feedback.");
     }
@@ -77,7 +95,6 @@ export default function Contact() {
         {/* Contact Info */}
         <div className="flex flex-col gap-3 mb-4 text-gray-700">
           <div className="flex items-center gap-2">
-            {/* Location icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 text-green-500"
@@ -107,7 +124,6 @@ export default function Contact() {
             </a>
           </div>
           <div className="flex items-center gap-2">
-            {/* Email icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 text-green-500"
@@ -130,7 +146,6 @@ export default function Contact() {
             </a>
           </div>
           <div className="flex items-center gap-2">
-            {/* Phone icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 text-green-500"
@@ -156,7 +171,7 @@ export default function Contact() {
           <input
             type="text"
             name="name"
-            placeholder="Your full Name"
+            placeholder="Your Full Name"
             value={formData.name}
             onChange={handleChange}
             className="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
@@ -170,6 +185,14 @@ export default function Contact() {
             onChange={handleChange}
             className="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
             required
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Your Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            className="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
           />
           <textarea
             name="message"
@@ -258,7 +281,6 @@ export default function Contact() {
         )}
       </div>
 
-      {/* Tailwind Animation */}
       <style>
         {`
           @keyframes slide-up {
