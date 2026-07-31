@@ -22,27 +22,27 @@ function App() {
             <Home />
           </section>
 
-          <section id="projects" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id="projects">
             <Projects />
           </section>
 
-          <section id="about" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id="about">
             <About />
           </section>
 
-          <section id="skill" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id="skill">
             <Skill />
           </section>
 
-          <section id="journey" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id="journey">
             <Journey />
           </section>
 
-          <section id=" My hobby" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id="hobby">
             <Hobby />
           </section>
 
-          <section id="motivations" className="transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-50 duration-300">
+          <section id="motivations">
             <Motivations />
           </section>
 

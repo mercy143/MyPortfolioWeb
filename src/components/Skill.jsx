@@ -1,5 +1,5 @@
-import React, {   } from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import skillBg from "../future-visions-business-technology-concept_23-2151893441.avif";
 
 const skills = [
   { name: "React", percent: 85, color: "from-blue-400 to-purple-500" },
@@ -10,8 +10,7 @@ const skills = [
   { name: "Android", percent: 90, color: "from-green-500 to-emerald-600" },
   { name: "Firebase Integration", percent: 85, color: "from-yellow-300 to-orange-400" },
   { name: "API Integration", percent: 90, color: "from-pink-400 to-purple-500" },
-  {name : "figma Design", percent: 70, color: "from-purple-400 to-pink-500" }
-
+  { name: "figma Design", percent: 70, color: "from-purple-400 to-pink-500" },
 ];
 
 function Skill() {
@@ -34,48 +33,55 @@ function Skill() {
   }, []);
 
   return (
-    <section className="max-w-3xl mx-auto p-6" ref={skillRef}>
-      <h2 className="text-2xl font-semibold mb-10 text-center">My Skills</h2>
-      <div className="space-y-6">
-        {skills.map((skill) => (
-          <div key={skill.name} className="group relative">
-            {/* Skill Name & Percent */}
-            <div className="flex justify-between mb-1">
-              <span className="text-gray-800 font-medium">{skill.name}</span>
-              <span className="text-gray-600">{visible ? `${skill.percent}%` : "0%"}</span>
-            </div>
+    <section className="relative overflow-hidden py-16" ref={skillRef}>
+      <img
+        src={skillBg}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-slate-900/60" aria-hidden="true" />
 
-            {/* Skill Bar */}
-            <div className="w-full bg-gray-200 rounded h-5 overflow-hidden relative shadow-sm group-hover:shadow-xl transition-shadow duration-300">
-              {/* Floating Badge */}
-              <div
-                className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full shadow-lg float-badge bg-gradient-to-br ${skill.color} animate-float-rotate transition-all duration-1000 group-hover:animate-pulse`}
-                style={{
-                  left: visible ? `calc(${skill.percent}% - 0.75rem)` : "0%",
-                  boxShadow: "0 0 10px rgba(0,0,0,0.3), 0 0 15px rgba(255,255,255,0.4)",
-                }}
-              ></div>
+      <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <h2 className="text-2xl font-semibold mb-10 text-center text-white">My Skills</h2>
+        <div className="space-y-6">
+          {skills.map((skill) => (
+            <div key={skill.name} className="group relative">
+              {/* Skill Name & Percent */}
+              <div className="flex justify-between mb-1">
+                <span className="text-white font-medium">{skill.name}</span>
+                <span className="text-slate-200">{visible ? `${skill.percent}%` : "0%"}</span>
+              </div>
 
-              {/* Animated Gradient Bar with shimmer */}
-              <div
-                className={`h-5 rounded float-gradient transition-all duration-1000 ease-out group-hover:scale-y-105`}
-                style={{
-                  width: visible ? `${skill.percent}%` : "0%",
-                  background: `linear-gradient(to right, var(--tw-gradient-stops))`,
-                  "--tw-gradient-from": skill.color.split(" ")[0],
-                  "--tw-gradient-to": skill.color.split(" ")[2],
-                  backgroundSize: "200% 100%",
-                  animation: "gradientShift 3s ease infinite",
-                }}
-                aria-label={`${skill.name} proficiency`}
-                aria-valuenow={skill.percent}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                role="progressbar"
-              ></div>
+              {/* Skill Bar */}
+              <div className="w-full bg-white/20 rounded h-5 overflow-hidden relative shadow-sm group-hover:shadow-xl transition-shadow duration-300 backdrop-blur-sm">
+                {/* Floating Badge */}
+                <div
+                  className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full shadow-lg float-badge bg-gradient-to-br ${skill.color} animate-float-rotate transition-all duration-1000 group-hover:animate-pulse`}
+                  style={{
+                    left: visible ? `calc(${skill.percent}% - 0.75rem)` : "0%",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.3), 0 0 15px rgba(255,255,255,0.4)",
+                  }}
+                ></div>
+
+                {/* Animated Gradient Bar with shimmer */}
+                <div
+                  className={`h-5 rounded float-gradient transition-all duration-1000 ease-out group-hover:scale-y-105 bg-gradient-to-r ${skill.color}`}
+                  style={{
+                    width: visible ? `${skill.percent}%` : "0%",
+                    backgroundSize: "200% 100%",
+                    animation: "gradientShift 3s ease infinite",
+                  }}
+                  aria-label={`${skill.name} proficiency`}
+                  aria-valuenow={skill.percent}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  role="progressbar"
+                ></div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

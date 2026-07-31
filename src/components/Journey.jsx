@@ -1,4 +1,6 @@
 import React from "react";
+import journeyBg from "../journey-moon-highway-sunset-with-mountains-background-fantasy-artwork_782419-980477.avif";
+import missionPassionBg from "../mission and passion.jpg";
 
 const milestoneColors = [
   "from-blue-400 to-purple-500",
@@ -69,71 +71,94 @@ function Journey() {
     ));
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
-      <h2 className="text-3xl font-bold mb-10 text-center">My Journey</h2>
+    <div className="relative overflow-hidden py-12">
+      <img
+        src={journeyBg}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-slate-900/55" aria-hidden="true" />
 
-      {/* Milestones */}
-      <div className="relative border-l border-gray-300">
-        {milestones.map((milestone, idx) => {
-          const color = milestoneColors[idx % milestoneColors.length];
-          return (
-            <div
-              key={idx}
-              className="mb-10 ml-6 relative transform transition-all duration-500 hover:scale-105"
-            >
+      <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <h2 className="text-3xl font-bold mb-10 text-center text-white">My Journey</h2>
+
+        {/* Milestones */}
+        <div className="relative border-l border-white/30">
+          {milestones.map((milestone, idx) => {
+            const color = milestoneColors[idx % milestoneColors.length];
+            return (
               <div
-                className={`absolute -left-3 top-2 w-5 h-5 rounded-full shadow-lg float-badge bg-gradient-to-br ${color} animate-float-rotate`}
-              ></div>
-              <time className="mb-1 text-sm font-normal leading-none text-gray-500">
-                {milestone.year}
-              </time>
-              <h3 className="text-lg font-semibold text-blue-900">
-                {milestone.title}
-              </h3>
-              <p className="text-gray-700 mt-1">{milestone.description}</p>
-            </div>
-          );
-        })}
+                key={idx}
+                className="mb-10 ml-6 relative transform transition-all duration-500 hover:scale-105"
+              >
+                <div
+                  className={`absolute -left-3 top-2 w-5 h-5 rounded-full shadow-lg float-badge bg-gradient-to-br ${color} animate-float-rotate`}
+                ></div>
+                <time className="mb-1 text-sm font-normal leading-none text-slate-300">
+                  {milestone.year}
+                </time>
+                <h3 className="text-lg font-semibold text-white">
+                  {milestone.title}
+                </h3>
+                <p className="text-slate-200 mt-1">{milestone.description}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mission & Passion */}
+        <div className="relative mt-12 overflow-hidden rounded-xl shadow-lg border border-white/20">
+          <img
+            src={missionPassionBg}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-slate-900/50" aria-hidden="true" />
+
+          <div className="relative z-10 p-6 sm:p-8 space-y-8">
+            {/* Mission Card */}
+            <section className="relative p-8 rounded-xl border border-white/20 bg-white/90 backdrop-blur-sm transform transition hover:scale-[1.02] hover:shadow-2xl hover:bg-white">
+              {renderConfetti(confettiColorsMission)}
+              <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center">
+                Mission
+              </h2>
+              <p className="text-lg text-gray-700 mb-4">
+                My mission is to build innovative and reliable software solutions that
+                solve real-world problems. I strive to deliver high-quality
+                applications, continuously learn, and make a meaningful impact
+                through technology.
+              </p>
+              <ul className="space-y-2 text-gray-700 list-disc list-inside">
+                <li>Create user-friendly mobile and web applications</li>
+                <li>Integrate robust APIs for seamless experiences</li>
+                <li>Maintain code quality and best practices</li>
+                <li>Help businesses and individuals achieve their goals</li>
+              </ul>
+            </section>
+
+            {/* Passion Card */}
+            <section className="relative p-8 rounded-xl border border-white/20 bg-white/90 backdrop-blur-sm transform transition hover:scale-[1.02] hover:shadow-2xl hover:bg-white">
+              {renderConfetti(confettiColorsVision)}
+              <h2 className="text-3xl font-bold text-green-900 mb-6 text-center">
+                Passion
+              </h2>
+              <p className="text-lg text-gray-700 mb-4">
+                My vision is to become a professional AI and software developer who
+                builds impactful technology solutions, inspires innovation, and
+                contributes to a smarter and more connected world.
+              </p>
+              <ul className="space-y-2 text-gray-700 list-disc list-inside">
+                <li>Be recognized as a skilled software developer and AI enthusiast</li>
+                <li>Continuously innovate and create meaningful software</li>
+                <li>Mentor and collaborate with upcoming developers</li>
+                <li>Use technology to solve global challenges</li>
+              </ul>
+            </section>
+          </div>
+        </div>
       </div>
-
-      {/* Mission Card */}
-      <section className="relative mt-12 p-8 rounded-xl shadow-lg border border-gray-200 bg-gradient-to-r from-blue-100 via-blue-50 to-blue-100 transform transition hover:scale-105 hover:shadow-2xl">
-        {renderConfetti(confettiColorsMission)}
-        <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center">
-          Mission
-        </h2>
-        <p className="text-lg text-gray-700 mb-4">
-          My mission is to build innovative and reliable software solutions that
-          solve real-world problems. I strive to deliver high-quality
-          applications, continuously learn, and make a meaningful impact
-          through technology.
-        </p>
-        <ul className="space-y-2 text-gray-700 list-disc list-inside">
-          <li>Create user-friendly mobile and web applications</li>
-          <li>Integrate robust APIs for seamless experiences</li>
-          <li>Maintain code quality and best practices</li>
-          <li>Help businesses and individuals achieve their goals</li>
-        </ul>
-      </section>
-
-      {/* Vision Card */}
-      <section className="relative mt-8 p-8 rounded-xl shadow-lg border border-gray-200 bg-gradient-to-r from-green-100 via-green-50 to-green-100 transform transition hover:scale-105 hover:shadow-2xl">
-        {renderConfetti(confettiColorsVision)}
-        <h2 className="text-3xl font-bold text-green-900 mb-6 text-center">
-          Vision
-        </h2>
-        <p className="text-lg text-gray-700 mb-4">
-          My vision is to become a professional AI and software developer who
-          builds impactful technology solutions, inspires innovation, and
-          contributes to a smarter and more connected world.
-        </p>
-        <ul className="space-y-2 text-gray-700 list-disc list-inside">
-          <li>Be recognized as a skilled software developer and AI enthusiast</li>
-          <li>Continuously innovate and create meaningful software</li>
-          <li>Mentor and collaborate with upcoming developers</li>
-          <li>Use technology to solve global challenges</li>
-        </ul>
-      </section>
 
       <style>
         {`

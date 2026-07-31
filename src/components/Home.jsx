@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import profileImg from "../assets/image.jpg";
+import heroVideo from "../assets/189040-884476384_medium.mp4";
+
 
 function Home() {
   const scrollToSection = (id) => {
@@ -35,18 +37,29 @@ function Home() {
   const technologies = ["Android", "Flutter", "API Integration", "Firebase", "React"];
 
   return (
-    <div className="min-h-screen bg-gray-50" id="home">
-      <section className="max-w-5xl mx-auto px-6 py-20">
+    <div className="relative min-h-screen overflow-hidden" id="home">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-slate-900/55" aria-hidden="true" />
+
+      <section className="relative z-10 max-w-5xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Left Text */}
           <div>
-            <p className="uppercase tracking-wide text-sm text-blue-600 font-semibold">
+            <p className="uppercase tracking-wide text-sm text-sky-300 font-semibold">
               Software Engineer and Developer
             </p>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mt-3">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white mt-3">
               Guash Berhe Tela
             </h1>
-            <p className="text-lg text-gray-700 mt-4">
+            <p className="text-lg text-slate-200 mt-4">
               I build reliable Android and Flutter apps, integrate robust APIs, and ship performant web UIs with React and TailwindCSS.
             </p>
 
@@ -55,12 +68,12 @@ function Home() {
               {technologies.map((tech, idx) => (
                 <span
                   key={tech}
-                  className={`px-3 py-1 rounded-full text-sm cursor-default transform transition-all duration-500 hover:scale-110 float-badge font-semibold ${
-                    idx % 2 === 0 ? "bg-blue-50 text-blue-700" :
-                    idx === 1 ? "bg-emerald-50 text-emerald-700" :
-                    idx === 2 ? "bg-orange-50 text-orange-700" :
-                    idx === 3 ? "bg-indigo-50 text-indigo-700" :
-                    "bg-sky-50 text-sky-700"
+                  className={`px-3 py-1 rounded-full text-sm cursor-default transform transition-all duration-500 hover:scale-110 float-badge font-semibold backdrop-blur-sm ${
+                    idx % 2 === 0 ? "bg-blue-500/25 text-blue-100" :
+                    idx === 1 ? "bg-emerald-500/25 text-emerald-100" :
+                    idx === 2 ? "bg-orange-500/25 text-orange-100" :
+                    idx === 3 ? "bg-indigo-500/25 text-indigo-100" :
+                    "bg-sky-500/25 text-sky-100"
                   }`}
                 >
                   {tech}
@@ -95,7 +108,7 @@ function Home() {
               ref={imgRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative w-56 h-56 md:w-64 md:h-64 mx-auto rounded-2xl overflow-hidden shadow-md transition-transform duration-500 transform-gpu cursor-pointer hover:shadow-2xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50"
+              className="relative w-56 h-56 md:w-64 md:h-64 mx-auto rounded-2xl overflow-hidden shadow-md transition-transform duration-500 transform-gpu cursor-pointer hover:shadow-2xl ring-1 ring-white/20"
             >
               <img
                 src={profileImg}
@@ -105,7 +118,7 @@ function Home() {
             </div>
 
             {/* Highlights Card */}
-            <div className="mt-6 rounded-2xl border bg-white shadow-md p-6 transition-all duration-500 hover:shadow-2xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50">
+            <div className="mt-6 rounded-2xl border border-white/20 bg-white/90 backdrop-blur-sm shadow-md p-6 transition-all duration-500 hover:shadow-2xl hover:bg-white">
               <h2 className="text-xl font-semibold text-gray-900 mb-3">Highlights</h2>
               <ul className="space-y-3 text-gray-700">
                 {[
