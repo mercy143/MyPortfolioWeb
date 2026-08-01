@@ -47,7 +47,15 @@ function Contact() {
         setStatus({ type: "success", message: result.message });
         setForm({ name: "", email: "", message: "" });
       } else {
-        setStatus({ type: "error", message: result.message || "Failed to send message." });
+        const serverMsg = result.message || "Failed to send message.";
+        setStatus({ type: "error", message: serverMsg });
+
+        // If server reports email service is not configured, fallback to mailto automatically
+        if (serverMsg.toLowerCase().includes("email service is not configured")) {
+          const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
+          const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} <${form.email}>`);
+          window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+        }
       }
     } catch {
       setStatus({
