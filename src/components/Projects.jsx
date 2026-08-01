@@ -68,11 +68,18 @@ function ProjectCard({ project }) {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {project.tech.map((item) => (
-            <span key={item} className="rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-100">
-              {item}
-            </span>
-          ))}
+          {(() => {
+            const techList = Array.isArray(project.tech)
+              ? project.tech
+              : typeof project.tech === "string"
+              ? project.tech.split(",").map((t) => t.trim()).filter(Boolean)
+              : [];
+            return techList.map((item) => (
+              <span key={item} className="rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-100">
+                {item}
+              </span>
+            ));
+          })()}
         </div>
 
         <ul className="mt-5 space-y-2 text-sm text-slate-300">
