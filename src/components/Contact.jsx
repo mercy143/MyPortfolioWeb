@@ -4,6 +4,12 @@ import { usePortfolio } from "../context/PortfolioContext";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+const canPostToServer = () => {
+  if (import.meta.env.VITE_API_URL) return true;
+  if (typeof window === "undefined") return false;
+  return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+};
+
 function Contact() {
   const { data, assets } = usePortfolio();
   const { profile, socials } = data;
@@ -21,6 +27,13 @@ function Contact() {
     setSubmitting(true);
     setStatus({ type: "", message: "" });
 
+    if (!canPostToServer()) {
+      const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
+      const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} <${form.email}>`);
+      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+      setSubmitting(false);
+      return;
+    }
     try {
       const response = await fetch(`${API_URL}/contact`, {
         method: "POST",
@@ -122,6 +135,11 @@ function Contact() {
             {status.message && (
               <p className={`text-sm ${status.type === "success" ? "text-green-600" : "text-red-600"}`}>
                 {status.message}
+              </p>
+            )}
+            {!canPostToServer() && (
+              <p className="text-sm text-slate-500 mt-2">
+                This deployment does not have an API server. The form will open your email client so you can contact me directly.
               </p>
             )}
           </form>
