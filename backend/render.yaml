@@ -1,0 +1,12 @@
+# Render service definition for the backend API
+# Visit https://render.com to create a new Web Service and connect the repository.
+# This file is informative for repository organization and can be used when creating the service manually.
+service: web
+name: my-portfolio-backend
+env: node
+region: oregon # choose your preferred region
+plan: free
+buildCommand: npm install
+startCommand: npm start
+healthCheckPath: /api/portfolio
+# Set the following environment variables in the Render dashboard: EMAIL_USER, EMAIL_PASS
