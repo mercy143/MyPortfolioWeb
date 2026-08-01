@@ -120,7 +120,7 @@ function Skill() {
                           <span className="font-medium text-white">{skill.name}</span>
                         </div>
                         <div className="text-right text-sm text-slate-300">
-                          <div>{visible ? `${skill.percent}%` : "0%"}</div>
+                          <div>{`${skill.percent}%`}</div>
                           <div className="text-xs text-slate-400">{skill.experience}</div>
                         </div>
                       </div>
