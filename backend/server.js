@@ -4,14 +4,23 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const portfolioData = JSON.parse(
+  readFileSync(join(__dirname, "data", "portfolio.json"), "utf-8")
+);
+
 app.use(cors());
 app.use(express.json());
 
-// Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -20,14 +29,21 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Contact route
+app.get("/api/portfolio", (_req, res) => {
+  res.json(portfolioData);
+});
+
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: "All fields are required." });
+  }
 
   try {
     await transporter.sendMail({
       from: email,
-      to: process.env.EMAIL_USER, // your inbox
+      to: process.env.EMAIL_USER,
       subject: `Portfolio Message from ${name}`,
       text: message,
     });
@@ -35,7 +51,7 @@ app.post("/contact", async (req, res) => {
     res.status(200).json({ success: true, message: "Message sent successfully!" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Error sending message", error });
+    res.status(500).json({ success: false, message: "Error sending message" });
   }
 });
 

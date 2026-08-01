@@ -1,0 +1,192 @@
+{
+  "profile": {
+    "name": "Guash Berhe Tela",
+    "shortName": "Guash Berhe",
+    "title": "Software Engineer and Developer",
+    "tagline": "I build reliable Android and Flutter apps, integrate robust APIs, and ship performant web UIs with React and TailwindCSS.",
+    "email": "guashberhe2019@gmail.com",
+    "phone": "+251932330844"
+  },
+  "nav": [
+    { "name": "Home", "id": "home" },
+    { "name": "Projects", "id": "projects" },
+    { "name": "About", "id": "about" },
+    { "name": "Journey", "id": "journey" },
+    { "name": "Skills", "id": "skill" },
+    { "name": "Hobby", "id": "hobby" },
+    { "name": "Motivations", "id": "motivations" },
+    { "name": "Contact", "id": "contact" }
+  ],
+  "home": {
+    "technologies": ["Android", "Flutter", "API Integration", "Firebase", "React"],
+    "highlights": [
+      "QR Scanner app for manual invoice validation with secure API",
+      "TIN validator integrating with SIGTAS",
+      "Android chat app with Firebase (Auth, Firestore, FCM)",
+      "User registration with Firebase Authentication"
+    ]
+  },
+  "projects": [
+    {
+      "title": "QR Scanner Mobile App",
+      "tech": "Android, Flutter, REST API",
+      "description": "QR scanner app for manual invoice validation with backend API integration.",
+      "highlights": [
+        "Scans QR codes to fetch and validate invoice details",
+        "Implemented camera handling and permission flows",
+        "Integrated secure REST endpoints for validation"
+      ],
+      "icon": "QrCode",
+      "iconColor": "text-blue-500"
+    },
+    {
+      "title": "TIN Validator Mobile app (SIGTAS Integration)",
+      "tech": "Android(Java), SIGTAS API",
+      "description": "Tax Identification Number validator integrated with SIGTAS systems.",
+      "highlights": [
+        "Validated TINs via SIGTAS APIs with proper error handling",
+        "Added request signing/auth and input normalization",
+        "Provided status dashboards and audit logs"
+      ],
+      "icon": "Database",
+      "iconColor": "text-purple-500"
+    },
+    {
+      "title": "Chat Messaging App",
+      "tech": "Android, Firebase (Auth, Firestore, FCM)",
+      "description": "Realtime chat application with Firebase backend services.",
+      "highlights": [
+        "User auth with Firebase Authentication",
+        "Realtime messaging via Firestore and push via FCM",
+        "Typing indicators, read receipts, and media upload"
+      ],
+      "icon": "MessageSquare",
+      "iconColor": "text-green-500"
+    },
+    {
+      "title": "User Registration System",
+      "tech": "Android, Firebase Authentication",
+      "description": "Signup/sign-in flows with secure session handling and profile storage.",
+      "highlights": [
+        "Email/password and social providers",
+        "Form validation and password reset",
+        "Protected routes and persistent sessions"
+      ],
+      "icon": "UserPlus",
+      "iconColor": "text-pink-500"
+    }
+  ],
+  "skills": [
+    { "name": "React", "percent": 85, "color": "from-blue-400 to-purple-500" },
+    { "name": "JavaScript", "percent": 90, "color": "from-yellow-400 to-orange-500" },
+    { "name": "TailwindCSS", "percent": 80, "color": "from-teal-400 to-cyan-500" },
+    { "name": "Python $ AI", "percent": 85, "color": "from-green-400 to-blue-500" },
+    { "name": "Flutter", "percent": 70, "color": "from-indigo-400 to-purple-500" },
+    { "name": "Android", "percent": 90, "color": "from-green-500 to-emerald-600" },
+    { "name": "Firebase Integration", "percent": 85, "color": "from-yellow-300 to-orange-400" },
+    { "name": "API Integration", "percent": 90, "color": "from-pink-400 to-purple-500" },
+    { "name": "figma Design", "percent": 70, "color": "from-purple-400 to-pink-500" }
+  ],
+  "about": {
+    "bio": "I'm a software engineer specialized in Android, Flutter, API integrations, and modern web UIs with React and TailwindCSS. I enjoy building reliable products with clean architecture and thoughtful UX.",
+    "education": {
+      "degree": "B.Sc. in Software Engineering",
+      "school": "Mekelle University • 2024 G.C"
+    },
+    "whatIDo": [
+      "Android and Flutter app development",
+      "Firebase (Auth, Firestore, FCM) integration",
+      "REST API design and integration",
+      "Modern web UIs with React + TailwindCSS"
+    ],
+    "strengths": [
+      "Clean architecture and maintainable code",
+      "Problem solving and debugging",
+      "Performance-minded and UX-focused",
+      "Team collaboration and communication",
+      "Self Motivated and quick learner"
+    ],
+    "glance": [
+      { "label": "Graduated", "value": "2024", "color": "from-blue-100 to-blue-200 text-blue-800" },
+      { "label": "University", "value": "Mekelle Univ.", "color": "from-green-100 to-green-200 text-green-800" },
+      { "label": "Focus", "value": "Mobile & Web", "color": "from-yellow-100 to-yellow-200 text-yellow-800" },
+      { "label": "Based", "value": "Ethiopia", "color": "from-purple-100 to-purple-200 text-purple-800" }
+    ]
+  },
+  "journey": {
+    "milestones": [
+      {
+        "year": "2021",
+        "title": "Started My Tech Journey",
+        "description": "Began exploring programming and software development, focusing on mobile and web technologies. Learned the fundamentals of Java, Python, and problem-solving."
+      },
+      {
+        "year": "2022",
+        "title": "Mobile & Web Development",
+        "description": "Specialized in Android development with Java and Flutter. Started working on small projects and contributed to real-world apps. Built strong skills in Firebase integration and backend APIs."
+      },
+      {
+        "year": "2023",
+        "title": "Professional Experience",
+        "description": "Worked as a software developer under the Ministry of Revenue, supervised by Director Kuratu Lemma. Developed mobile and web solutions, including tax reporting applications with Firebase and charts."
+      },
+      {
+        "year": "2024",
+        "title": "Expanding Horizons",
+        "description": "Focused on ReactJS for frontend development and Python for backend. Started exploring AI and data science. Designed a Kebele Administration system with Flutter and integrated advanced Android features like QR scanning, file picker, and chat messaging."
+      },
+      {
+        "year": "2025/2026",
+        "title": "Dreaming Bigger",
+        "description": "Aiming to pursue a Master's scholarship abroad in Project Management/ Artificial Intelligence/Software Engineering/Data Science/Computer Science. Currently building professional Mobile and Web Applications, freelancing in Android app development, and working towards becoming a professional AI developer and cyber security expert."
+      }
+    ],
+    "mission": {
+      "title": "Mission",
+      "description": "My mission is to build innovative and reliable software solutions that solve real-world problems. I strive to deliver high-quality applications, continuously learn, and make a meaningful impact through technology.",
+      "points": [
+        "Create user-friendly mobile and web applications",
+        "Integrate robust APIs for seamless experiences",
+        "Maintain code quality and best practices",
+        "Help businesses and individuals achieve their goals"
+      ]
+    },
+    "passion": {
+      "title": "Passion",
+      "description": "My vision is to become a professional AI and software developer who builds impactful technology solutions, inspires innovation, and contributes to a smarter and more connected world.",
+      "points": [
+        "Be recognized as a skilled software developer and AI enthusiast",
+        "Continuously innovate and create meaningful software",
+        "Mentor and collaborate with upcoming developers",
+        "Use technology to solve global challenges"
+      ]
+    }
+  },
+  "hobbies": {
+    "intro": "I enjoy exploring new technologies, building personal projects, reading tech blogs, working on side projects that improve my skills, and staying active with sports.",
+    "items": [
+      { "name": "Mobile app development", "icon": "FaMobileAlt" },
+      { "name": "Experimenting with Flutter and React", "icon": "FaReact" },
+      { "name": "Reading books on AI and programming", "icon": "FaBook" },
+      { "name": "Playing chess and puzzles", "icon": "FaChess" },
+      { "name": "Playing musical instruments", "icon": "FaGuitar" },
+      { "name": "Reading Motivational Books and Listening Motivational Speeches", "icon": "FaBullhorn" },
+      { "name": "Sports", "icon": "FaFootballBall" }
+    ]
+  },
+  "motivations": {
+    "intro": "I am motivated by creating impactful software, solving real-world problems, and continuously learning new technologies. I aim to deliver reliable, scalable, and user-friendly applications that make a difference.",
+    "points": [
+      { "text": "Building meaningful projects that help people", "icon": "FaProjectDiagram", "gradient": "from-purple-500 to-indigo-500" },
+      { "text": "Learning and mastering new technologies", "icon": "FaLaptopCode", "gradient": "from-green-400 to-teal-500" },
+      { "text": "Collaborating with passionate developers", "icon": "FaUsers", "gradient": "from-yellow-400 to-orange-500" },
+      { "text": "Growing as a professional and a leader", "icon": "FaChartLine", "gradient": "from-pink-400 to-red-500" }
+    ]
+  },
+  "socials": [
+    { "name": "Telegram", "url": "https://t.me/@zeberling", "hoverColor": "hover:text-blue-600" },
+    { "name": "YouTube", "url": "https://www.youtube.com/@Amerawi", "hoverColor": "hover:text-red-600" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/guashberhe2026", "hoverColor": "hover:text-blue-700" },
+    { "name": "GitHub", "url": "https://github.com/mercy143", "hoverColor": "hover:text-gray-900" }
+  ]
+}

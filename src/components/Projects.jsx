@@ -1,154 +1,174 @@
-import React, { useRef } from "react";
-import {
-  QrCode,
-  Database,
-  MessageSquare,
-  UserPlus,
-} from "lucide-react";
-import projectsVideo from "../202587-918431513_medium.mp4";
+import React, { useMemo, useRef, useState } from "react";
+import { FaArrowRight, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { usePortfolio } from "../context/PortfolioContext";
 
-function Projects() {
-  const projects = [
-    {
-      title: "QR Scanner Mobile App",
-      tech: "Android, Flutter, REST API",
-      description:
-        "QR scanner app for manual invoice validation with backend API integration.",
-      highlights: [
-        "Scans QR codes to fetch and validate invoice details",
-        "Implemented camera handling and permission flows",
-        "Integrated secure REST endpoints for validation",
-      ],
-      icon: <QrCode className="w-8 h-8 text-blue-500 animate-float-rotate transition-transform duration-300" />,
-    },
-    {
-      title: "TIN Validator Mobile app (SIGTAS Integration)",
-      tech: "Android(Java), SIGTAS API",
-      description:
-        "Tax Identification Number validator integrated with SIGTAS systems.",
-      highlights: [
-        "Validated TINs via SIGTAS APIs with proper error handling",
-        "Added request signing/auth and input normalization",
-        "Provided status dashboards and audit logs",
-      ],
-      icon: <Database className="w-8 h-8 text-purple-500 animate-float-rotate transition-transform duration-300" />,
-    },
-    {
-      title: "Chat Messaging App",
-      tech: "Android, Firebase (Auth, Firestore, FCM)",
-      description:
-        "Realtime chat application with Firebase backend services.",
-      highlights: [
-        "User auth with Firebase Authentication",
-        "Realtime messaging via Firestore and push via FCM",
-        "Typing indicators, read receipts, and media upload",
-      ],
-      icon: <MessageSquare className="w-8 h-8 text-green-500 animate-float-rotate transition-transform duration-300" />,
-    },
-    {
-      title: "User Registration System",
-      tech: "Android, Firebase Authentication",
-      description:
-        "Signup/sign-in flows with secure session handling and profile storage.",
-      highlights: [
-        "Email/password and social providers",
-        "Form validation and password reset",
-        "Protected routes and persistent sessions",
-      ],
-      icon: <UserPlus className="w-8 h-8 text-pink-500 animate-float-rotate transition-transform duration-300" />,
-    },
-  ];
+const FILTERS = ["All", "AI", "Machine Learning", "Full Stack", "Backend", "Data Engineering", "Android"];
 
-  const handleMouseMove = (e, cardRef) => {
+function ProjectCard({ project }) {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
     const card = cardRef.current;
     if (!card) return;
-
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-
     const rotateX = ((y - centerY) / 20).toFixed(2);
     const rotateY = ((centerX - x) / 20).toFixed(2);
-
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
   };
 
-  const handleMouseLeave = (cardRef) => {
+  const handleMouseLeave = () => {
     const card = cardRef.current;
     if (!card) return;
     card.style.transform = "rotateX(0) rotateY(0) scale(1)";
   };
 
+  const previewClasses = {
+    AI: "from-cyan-500/20 via-blue-600/10 to-violet-600/20",
+    "Machine Learning": "from-emerald-500/20 via-teal-600/10 to-cyan-600/20",
+    "Full Stack": "from-fuchsia-500/20 via-purple-600/10 to-indigo-600/20",
+    Backend: "from-orange-500/20 via-amber-600/10 to-rose-600/20",
+    "Data Engineering": "from-sky-500/20 via-blue-600/10 to-cyan-600/20",
+    Android: "from-green-500/20 via-emerald-600/10 to-lime-600/20",
+  };
+
   return (
-    <section className="relative overflow-hidden py-12" id="projects">
+    <article
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-slate-950/70 p-0 shadow-xl backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:border-sky-400/40 hover:shadow-2xl ${project.featured ? "lg:col-span-2" : ""}`}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      <div className={`relative h-40 bg-gradient-to-br ${previewClasses[project.category] || "from-slate-700 to-slate-900"}`}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.25),_transparent_55%)]" />
+        <div className="absolute left-5 top-5 rounded-full border border-white/15 bg-slate-900/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-100 backdrop-blur-sm">
+          {project.status}
+        </div>
+        <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-100 backdrop-blur-sm">
+          {project.category}
+        </div>
+        <div className="absolute bottom-5 left-5 rounded-2xl border border-white/15 bg-slate-900/55 px-4 py-3 text-white shadow-lg backdrop-blur-sm">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-sky-200">Preview</p>
+          <p className="mt-1 text-sm font-semibold">{project.previewLabel}</p>
+        </div>
+      </div>
+
+      <div className="p-6">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-sky-300">
+              {project.title}
+            </h3>
+            <p className="mt-2 text-sm text-slate-300">{project.description}</p>
+          </div>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.tech.map((item) => (
+            <span key={item} className="rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-100">
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <ul className="mt-5 space-y-2 text-sm text-slate-300">
+          {project.highlights.map((h) => (
+            <li key={h} className="flex items-start gap-2">
+              <span className="mt-1 text-sky-300">✔</span>
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          {project.liveUrl && (
+            <a href={project.liveUrl} className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-2 text-sm font-semibold text-sky-100 transition hover:bg-sky-500/20">
+              Live Demo <FaExternalLinkAlt />
+            </a>
+          )}
+          {project.githubUrl && (
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2 text-sm font-semibold text-slate-100 transition hover:bg-white/20">
+              GitHub <FaGithub />
+            </a>
+          )}
+          {project.readMoreUrl && (
+            <a href={project.readMoreUrl} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-transparent px-3 py-2 text-sm font-semibold text-slate-200 transition hover:text-white">
+              Read More <FaArrowRight />
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function Projects() {
+  const { data, assets } = usePortfolio();
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "All") return data.projects;
+    return data.projects.filter((project) => project.category === activeFilter || project.category === "Full Stack" && activeFilter === "Full Stack");
+  }, [activeFilter, data.projects]);
+
+  const stats = [
+    { value: "15+", label: "Projects" },
+    { value: "30+", label: "Technologies" },
+    { value: "100+", label: "GitHub Commits" },
+    { value: "5+", label: "AI Projects" },
+  ];
+
+  return (
+    <section className="relative overflow-hidden py-16">
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src={projectsVideo}
+        src={assets.projectsVideo}
         autoPlay
         muted
         loop
         playsInline
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-slate-900/60" aria-hidden="true" />
+      <div className="absolute inset-0 bg-slate-950/75" aria-hidden="true" />
 
-      <div className="relative z-10 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center text-white">
-          My Projects
-        </h2>
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-300">Selected Work</p>
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Featured Projects</h2>
+          <p className="mt-4 text-lg text-slate-300">
+            AI, machine learning, data engineering, and full-stack systems built to solve real-world problems.
+          </p>
+        </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => {
-            const cardRef = useRef(null);
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {FILTERS.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${activeFilter === filter ? "border-sky-400/40 bg-sky-500/20 text-white shadow-lg" : "border-white/10 bg-white/10 text-slate-200 hover:bg-white/20"}`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
 
-            return (
-              <article
-                key={p.title}
-                ref={cardRef}
-                onMouseMove={(e) => handleMouseMove(e, cardRef)}
-                onMouseLeave={() => handleMouseLeave(cardRef)}
-                className="group relative rounded-2xl border border-white/20 bg-white/95 backdrop-blur-sm shadow-md p-6
-                           transition-all duration-500 ease-out
-                           hover:shadow-2xl hover:border-transparent
-                           hover:bg-white
-                           transform-gpu will-change-transform"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 rounded-full bg-gray-100 shadow-md">
-                    {p.icon}
-                  </div>
-                  <h3 className="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors">
-                    {p.title}
-                  </h3>
-                </div>
+        <div className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
+        </div>
 
-                <span className="inline-block mb-3 text-xs px-3 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md">
-                  {p.tech}
-                </span>
-
-                <p className="text-gray-700 mb-4">{p.description}</p>
-
-                <ul className="space-y-2 text-gray-700">
-                  {p.highlights.map((h, idx) => (
-                    <li
-                      key={h}
-                      className={`flex items-start gap-2 transform transition-all duration-500
-                                 group-hover:translate-x-2 group-hover:text-blue-800 delay-[${idx * 100}ms]`}
-                    >
-                      <span className="text-blue-500">✔</span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-blue-100 to-purple-100 blur-lg -z-10"></div>
-              </article>
-            );
-          })}
+        <div className="mt-10 grid gap-4 rounded-[1.75rem] border border-white/10 bg-slate-900/45 p-6 shadow-2xl backdrop-blur-md md:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/10 p-4 text-center">
+              <h3 className="text-2xl font-bold text-white">{stat.value}</h3>
+              <p className="mt-1 text-sm text-slate-300">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

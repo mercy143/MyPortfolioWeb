@@ -1,0 +1,309 @@
+{
+  "profile": {
+    "name": "Guash Berhe Tela",
+    "shortName": "Guash Berhe",
+    "title": "AI Engineer • Full Stack Developer • Data Engineer",
+    "tagline": "I design and build intelligent AI applications, scalable backend systems, and modern web platforms using Python, FastAPI, Next.js, React, and Machine Learning. Passionate about Data Engineering, LLMs, and Cloud Technologies.",
+    "email": "guashberhe2019@gmail.com",
+    "phone": "+251932330844"
+  },
+  "nav": [
+    { "name": "Home", "id": "home" },
+    { "name": "Projects", "id": "projects" },
+    { "name": "About", "id": "about" },
+    { "name": "Journey", "id": "journey" },
+    { "name": "Skills", "id": "skill" },
+    { "name": "Hobby", "id": "hobby" },
+    { "name": "Motivations", "id": "motivations" },
+    { "name": "Contact", "id": "contact" }
+  ],
+  "home": {
+    "technologies": ["Python", "FastAPI", "Next.js", "React", "Machine Learning", "Docker"],
+    "highlights": [
+      "🏠 Ethiopia House Price Prediction Platform using AI",
+      "🤖 Machine Learning & Deep Learning Projects",
+      "⚡ FastAPI REST APIs with PostgreSQL",
+      "📊 Data Engineering & ETL Pipelines",
+      "☁️ Docker, GitHub & Cloud Deployment"
+    ]
+  },
+  "projects": [
+    {
+      "title": "Ethiopia House Price Prediction System",
+      "category": "AI",
+      "status": "Featured Project",
+      "tech": ["Next.js", "FastAPI", "Python", "Machine Learning", "PostgreSQL", "Docker"],
+      "description": "An end-to-end AI platform that predicts Ethiopian house prices with an interactive analytics dashboard and REST API backend.",
+      "highlights": [
+        "Predicts house prices using ML models",
+        "Interactive analytics dashboard",
+        "REST API integrated with PostgreSQL",
+        "Docker-ready deployment architecture"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143/ai-house-price-prediction.git",
+      "readMoreUrl": "#contact",
+      "previewLabel": "House Price Prediction",
+      "featured": true
+    },
+    {
+      "title": "Cost Sharing Management System",
+      "category": "Full Stack",
+      "status": "Production",
+      "tech": ["Laravel", "React", "PostgreSQL", "Bootstrap", "Node.js +Express"],
+      "description": "A collaborative cost-sharing platform for managing shared expenses, settlements, and group transactions with a clean dashboard and secure workflow.",
+      "highlights": [
+        "Managed group expense tracking and settlement logic",
+        "Built role-based workflows for participants and admins",
+        "Delivered a transparent dashboard for balances and payments"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143/cost-sharing-management-system.git",
+      "readMoreUrl": "#contact",
+      "previewLabel": "Expense Allocation",
+      "featured": false
+    },
+    {
+      "title": "Moodle Customized Learning Management System",
+      "category": "Full Stack",
+      "status": "Customized Platform",
+    "tech": ["Moodle", "PHP", "MySQL","MariaDB", "Bootstrap","Plugin","Integrating BigBlueButton","Nginx", "Plugin Development"],
+      "description": "A customized Moodle-based learning management system tailored for institutional learning workflows, course delivery, and user management.",
+      "highlights": [
+        "Customized Moodle UI and learning experience flows",
+        "Configured course structures, user roles, and reporting",
+        "Extended features for institution-specific academic operations"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143/ministry-of-revenue-learning-management-lms.git",
+      "readMoreUrl": "#contact",
+      "previewLabel": "LMS Customization",
+      "featured": false
+    },
+    {
+      "title": "Mall Customer Segmentation",
+      "category": "Machine Learning",
+      "status": "Research",
+      "tech": ["Python", "Scikit-Learn", "Pandas", "Seaborn"],
+      "description": "Customer segmentation project that uses clustering and behavioral data to uncover market groups for smarter decision making.",
+      "highlights": [
+        "Applied clustering algorithms for pattern discovery",
+        "Built data pipelines for preprocessing and visualization",
+        "Delivered insight-driven analysis for business use cases"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143",
+      "readMoreUrl": "#contact",
+      "previewLabel": "ML Clustering",
+      "featured": false
+    },
+    {
+      "title": "Spam Email Detection",
+      "category": "AI",
+      "status": "Open Source",
+      "tech": ["Python", "NLP", "Scikit-Learn", "FastAPI"],
+      "description": "A text classification system designed to detect spam emails using NLP techniques and machine learning models.",
+      "highlights": [
+        "Trained and evaluated predictive models",
+        "Implemented text preprocessing and feature engineering",
+        "Exposed predictions through a lightweight API"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143/ai-house-price-prediction.git",
+      "readMoreUrl": "#contact",
+      "previewLabel": "NLP Classification",
+      "featured": false
+    },
+    {
+      "title": "AI Tax Risk Prediction",
+      "category": "Data Engineering",
+      "status": "Prototype",
+      "tech": ["Python", "PostgreSQL", "ETL", "Machine Learning"],
+      "description": "A data-driven risk scoring solution for identifying suspicious tax-related activity using ETL pipelines and predictive modeling.",
+      "highlights": [
+        "Built structured data workflows and transformations",
+        "Integrated modeling pipelines for risk scoring",
+        "Prepared analytics-ready datasets for reporting"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143",
+      "readMoreUrl": "#contact",
+      "previewLabel": "Risk Scoring",
+      "featured": false
+    },
+    {
+      "title": "QR Scanner Mobile App",
+      "category": "Android",
+      "status": "Production",
+      "tech": ["Flutter", "Android", "REST API", "Camera"],
+      "description": "Enterprise mobile application used for secure invoice validation through REST APIs with offline support and optimized camera scanning.",
+      "highlights": [
+        "Scans QR codes to fetch and validate invoice details",
+        "Implemented camera handling and permission flows",
+        "Integrated secure REST endpoints for validation"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143",
+      "readMoreUrl": "#contact",
+      "previewLabel": "Invoice Validation",
+      "featured": false
+    },
+    {
+      "title": "TIN Validator Mobile App",
+      "category": "Backend",
+      "status": "Production",
+      "tech": ["Android", "Java", "SIGTAS API", "REST"],
+      "description": "A tax identification number validator integrated with government systems for rapid verification and audit support.",
+      "highlights": [
+        "Validated TINs via SIGTAS APIs with proper error handling",
+        "Added request signing and input normalization",
+        "Provided status dashboards and audit logs"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/mercy143",
+      "readMoreUrl": "#contact",
+      "previewLabel": "Tax Validation",
+      "featured": false
+    }
+  ],
+  "skills": [
+    { "name": "Python", "percent": 92, "color": "from-cyan-400 to-blue-500" },
+    { "name": "JavaScript", "percent": 88, "color": "from-yellow-400 to-orange-500" },
+    { "name": "Java", "percent": 85, "color": "from-red-400 to-orange-500" },
+    { "name": "SQL", "percent": 90, "color": "from-indigo-400 to-purple-500" },
+    { "name": "Machine Learning", "percent": 88, "color": "from-emerald-400 to-cyan-500" },
+    { "name": "Deep Learning", "percent": 80, "color": "from-violet-400 to-fuchsia-500" },
+    { "name": "FastAPI", "percent": 90, "color": "from-teal-400 to-cyan-500" },
+    { "name": "Scikit-learn", "percent": 88, "color": "from-green-400 to-emerald-500" },
+    { "name": "Pandas / NumPy", "percent": 90, "color": "from-sky-400 to-blue-500" },
+    { "name": "Apache Spark", "percent": 75, "color": "from-orange-400 to-amber-500" },
+    { "name": "PySpark", "percent": 78, "color": "from-rose-400 to-pink-500" },
+    { "name": "Kafka", "percent": 70, "color": "from-purple-400 to-indigo-500" },
+    { "name": "Airflow", "percent": 72, "color": "from-slate-400 to-slate-600" },
+    { "name": "Docker", "percent": 80, "color": "from-cyan-400 to-sky-500" },
+    { "name": "React", "percent": 85, "color": "from-blue-400 to-cyan-500" },
+    { "name": "Next.js", "percent": 82, "color": "from-slate-400 to-slate-600" },
+    { "name": "TailwindCSS", "percent": 85, "color": "from-teal-400 to-cyan-500" },
+    { "name": "REST APIs", "percent": 92, "color": "from-fuchsia-400 to-purple-500" },
+    { "name": "PostgreSQL", "percent": 85, "color": "from-blue-500 to-indigo-500" },
+    { "name": "Firebase", "percent": 82, "color": "from-yellow-400 to-orange-500" },
+    { "name": "Git", "percent": 85, "color": "from-orange-400 to-red-500" },
+    { "name": "Linux", "percent": 80, "color": "from-blue-400 to-slate-500" },
+    { "name": "Flutter", "percent": 75, "color": "from-indigo-400 to-purple-500" },
+    { "name": "Android", "percent": 80, "color": "from-green-400 to-emerald-500" }
+  ],
+  "about": {
+    "bio": "Software Engineer with experience in Artificial Intelligence, Machine Learning, Full Stack Development, and Data Engineering. I build scalable web applications, AI-powered solutions, and RESTful APIs using Python, FastAPI, React, Next.js, PostgreSQL, and modern cloud technologies.",
+    "education": {
+      "degree": "Bachelor of Science in Software Engineering",
+      "school": "Mekelle University • Graduated 2024"
+    },
+    "whatIDo": [
+      "Artificial Intelligence & Machine Learning",
+      "Full Stack Development (Next.js + FastAPI)",
+      "REST API & Backend Development",
+      "Data Engineering & ETL",
+      "Cloud Deployment & Docker"
+    ],
+    "strengths": [
+      "Machine Learning Model Development",
+      "FastAPI & Python Backend Development",
+      "RESTful API Design",
+      "SQL & PostgreSQL",
+      "Problem Solving & Algorithms",
+      "Clean Architecture"
+    ],
+    "glance": [
+      { "label": "Graduated", "value": "2024", "color": "from-blue-100 to-blue-200 text-blue-800" },
+      { "label": "University", "value": "Mekelle Univ.", "color": "from-green-100 to-green-200 text-green-800" },
+      { "label": "Focus", "value": "AI • Data • Web", "color": "from-yellow-100 to-yellow-200 text-yellow-800" },
+      { "label": "Based", "value": "Ethiopia", "color": "from-purple-100 to-purple-200 text-purple-800" }
+    ]
+  },
+  "journey": {
+    "milestones": [
+      {
+        "year": "2021",
+        "title": "Started My Programming Journey",
+        "description": "Learned programming fundamentals, built early Java applications, and explored Python, web development, and problem-solving."
+      },
+      {
+        "year": "2022",
+        "title": "Mobile Development",
+        "description": "Focused on Android development with Java and Flutter, built small applications, and strengthened skills in Firebase and REST APIs."
+      },
+      {
+        "year": "2024",
+        "title": "Software Developer at the Ministry of Revenue",
+        "description": "Developed enterprise software for electronic invoice systems, QR-based validation, mobile applications, API integration, database work, and testing."
+      },
+      {
+        "year": "2025",
+        "title": "Transition into AI & Full Stack Development",
+        "description": "Expanded into React, Next.js, FastAPI, machine learning, and data engineering to build modern intelligent applications."
+      },
+      {
+        "year": "2026",
+        "title": "Artificial Intelligence & Data Engineering",
+        "description": "Built the Ethiopia House Price Prediction System, developed FastAPI backends, Next.js interfaces, ML models, and deepened my specialization in AI and data engineering."
+      },
+      {
+        "year": "2027+",
+        "title": "Future Goals",
+        "description": "Aiming to grow as an AI Engineer, Data Engineer, LLM Engineer, and open-source contributor while continuing to build impactful solutions."
+      }
+    ],
+    "mission": {
+      "title": "Mission",
+      "description": "My mission is to build intelligent software solutions powered by Artificial Intelligence, Machine Learning, and scalable cloud technologies that solve real-world problems and create measurable impact for businesses and society.",
+      "points": [
+        "Create intelligent applications with practical business value",
+        "Design scalable APIs and backend systems",
+        "Build data-driven solutions with strong engineering foundations",
+        "Contribute to meaningful innovation through technology"
+      ]
+    },
+    "passion": {
+      "title": "Passion",
+      "description": "I am passionate about Artificial Intelligence, Data Engineering, Backend Development, and building scalable systems that combine software engineering with machine learning to solve practical challenges.",
+      "points": [
+        "Exploring AI and machine learning to create real-world impact",
+        "Building robust, scalable applications and APIs",
+        "Continuously learning new tools and technologies",
+        "Creating solutions that make a meaningful difference"
+      ]
+    }
+  },
+  "hobbies": {
+    "intro": "I enjoy exploring emerging technologies, building AI-powered applications, contributing to personal projects, and continuously improving my software engineering skills. Beyond technology, I enjoy strategic games, reading, music, and staying physically active.",
+    "items": [
+      { "name": "Building AI and Machine Learning applications", "icon": "FaBrain" },
+      { "name": "Developing full-stack web applications with React, Next.js, and FastAPI", "icon": "FaReact" },
+      { "name": "Exploring Data Engineering and Big Data technologies", "icon": "FaDatabase" },
+      { "name": "Reading books on Artificial Intelligence, Software Engineering, and Personal Development", "icon": "FaBook" },
+      { "name": "Playing chess and solving logical puzzles", "icon": "FaChess" },
+      { "name": "Listening to music and playing musical instruments", "icon": "FaGuitar" },
+      { "name": "Staying active through sports and fitness", "icon": "FaFootballBall" },
+      { "name": "Learning about emerging technologies and innovation", "icon": "FaBullhorn" }
+    ]
+  },
+  "motivations": {
+    "intro": "I am passionate about building intelligent software solutions that solve real-world problems. My motivation comes from continuous learning, creating meaningful technology, and making a positive impact through Artificial Intelligence, Full-Stack Development, and Data Engineering.",
+    "points": [
+      { "text": "Building innovative AI solutions that create real-world impact", "icon": "FaBrain", "gradient": "from-purple-500 to-indigo-500" },
+      { "text": "Developing software that improves people's lives", "icon": "FaLaptopCode", "gradient": "from-emerald-400 to-teal-500" },
+      { "text": "Continuously learning new technologies and industry best practices", "icon": "FaBookOpen", "gradient": "from-sky-400 to-cyan-500" },
+      { "text": "Collaborating with talented engineers and diverse teams", "icon": "FaUsers", "gradient": "from-yellow-400 to-orange-500" },
+      { "text": "Solving complex technical challenges with creative solutions", "icon": "FaLightbulb", "gradient": "from-pink-400 to-rose-500" },
+      { "text": "Growing into an AI Engineer and Data Engineer", "icon": "FaChartLine", "gradient": "from-cyan-400 to-blue-500" },
+      { "text": "Contributing to open-source projects and the developer community", "icon": "FaCodeBranch", "gradient": "from-lime-400 to-emerald-500" },
+      { "text": "Delivering scalable, reliable, and high-quality software", "icon": "FaShieldAlt", "gradient": "from-slate-400 to-slate-600" }
+    ]
+  },
+  "socials": [
+    { "name": "Telegram", "url": "https://t.me/OOwno1", "hoverColor": "hover:text-blue-600" },
+    { "name": "YouTube", "url": "https://www.youtube.com/@Amerawi", "hoverColor": "hover:text-red-600" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/guashberhe2026", "hoverColor": "hover:text-blue-700" },
+    { "name": "GitHub", "url": "https://github.com/mercy143", "hoverColor": "hover:text-gray-900" }
+  ]
+}
