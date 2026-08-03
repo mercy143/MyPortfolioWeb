@@ -9,27 +9,47 @@ function Skill() {
   const skillRef = useRef(null);
 
   useEffect(() => {
+    const element = skillRef.current;
+    if (!element) return;
+
+    let isMounted = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
+        if (entry?.isIntersecting) {
+          if (isMounted) {
+            setVisible(true);
+          }
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.15 }
     );
 
-    if (skillRef.current) {
-      // If the section is already visible on mount, set visible immediately
-      const rect = skillRef.current.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        setVisible(true);
-      } else {
-        observer.observe(skillRef.current);
+    const activateIfVisible = () => {
+      const rect = element.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200 && rect.bottom > 0) {
+        if (isMounted) {
+          setVisible(true);
+        }
+        return true;
       }
-    }
+      observer.observe(element);
+      return false;
+    };
 
-    return () => observer.disconnect();
+    const frame = window.requestAnimationFrame(() => {
+      if (!activateIfVisible()) {
+        window.setTimeout(() => {
+          activateIfVisible();
+        }, 300);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
