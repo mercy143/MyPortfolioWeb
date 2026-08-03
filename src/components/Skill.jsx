@@ -13,42 +13,42 @@ function Skill() {
     if (!element) return;
 
     let isMounted = true;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          if (isMounted) {
-            setVisible(true);
-          }
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
+    let activated = false;
 
     const activateIfVisible = () => {
+      if (!isMounted || activated) return true;
+
       const rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 200 && rect.bottom > 0) {
-        if (isMounted) {
-          setVisible(true);
-        }
+      const isInView = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
+
+      if (isInView) {
+        activated = true;
+        setVisible(true);
         return true;
       }
-      observer.observe(element);
+
       return false;
     };
 
     const frame = window.requestAnimationFrame(() => {
-      if (!activateIfVisible()) {
-        window.setTimeout(() => {
-          activateIfVisible();
-        }, 300);
-      }
+      activateIfVisible();
+      window.setTimeout(() => {
+        activateIfVisible();
+      }, 300);
     });
+
+    const handleScrollOrResize = () => {
+      activateIfVisible();
+    };
+
+    window.addEventListener("scroll", handleScrollOrResize, { passive: true });
+    window.addEventListener("resize", handleScrollOrResize);
 
     return () => {
       isMounted = false;
       window.cancelAnimationFrame(frame);
-      observer.disconnect();
+      window.removeEventListener("scroll", handleScrollOrResize);
+      window.removeEventListener("resize", handleScrollOrResize);
     };
   }, []);
 
