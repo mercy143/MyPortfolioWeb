@@ -3,7 +3,25 @@ import { portfolioData as localData, portfolioAssets } from "../data/portfolio";
 
 const PortfolioContext = createContext(null);
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const getApiBaseUrl = () => {
+  const configuredValue = import.meta.env.VITE_API_URL?.trim();
+  if (!configuredValue) {
+    return import.meta.env.PROD ? "" : "http://localhost:5000";
+  }
+
+  if (/your[-_ ]?render[-_ ]?backend[-_ ]?url|your-backend-url|example\.com/i.test(configuredValue)) {
+    return "";
+  }
+
+  try {
+    const url = new URL(configuredValue.includes("://") ? configuredValue : `https://${configuredValue}`);
+    return url.origin;
+  } catch {
+    return "";
+  }
+};
+
+const API_URL = getApiBaseUrl();
 
 export function PortfolioProvider({ children }) {
   const [data, setData] = useState(localData);
@@ -14,6 +32,15 @@ export function PortfolioProvider({ children }) {
     let cancelled = false;
 
     async function loadPortfolio() {
+      if (!API_URL) {
+        if (!cancelled) {
+          setData(localData);
+          setSource("local");
+        }
+        if (!cancelled) setLoading(false);
+        return;
+      }
+
       try {
         const response = await fetch(`${API_URL}/api/portfolio`);
         if (!response.ok) throw new Error("Failed to fetch portfolio");

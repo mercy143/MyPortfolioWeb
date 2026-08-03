@@ -9,46 +9,35 @@ function Skill() {
   const skillRef = useRef(null);
 
   useEffect(() => {
-    const element = skillRef.current;
-    if (!element) return;
+    const node = skillRef.current;
+    if (!node) return undefined;
 
-    let isMounted = true;
-    let activated = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
 
-    const activateIfVisible = () => {
-      if (!isMounted || activated) return true;
-
-      const rect = element.getBoundingClientRect();
-      const isInView = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
-
-      if (isInView) {
-        activated = true;
+    const checkVisibility = () => {
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
         setVisible(true);
-        return true;
+        observer.disconnect();
+      } else {
+        observer.observe(node);
       }
-
-      return false;
     };
 
-    const frame = window.requestAnimationFrame(() => {
-      activateIfVisible();
-      window.setTimeout(() => {
-        activateIfVisible();
-      }, 300);
-    });
-
-    const handleScrollOrResize = () => {
-      activateIfVisible();
-    };
-
-    window.addEventListener("scroll", handleScrollOrResize, { passive: true });
-    window.addEventListener("resize", handleScrollOrResize);
+    requestAnimationFrame(checkVisibility);
+    window.addEventListener("load", checkVisibility);
 
     return () => {
-      isMounted = false;
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", handleScrollOrResize);
-      window.removeEventListener("resize", handleScrollOrResize);
+      observer.disconnect();
+      window.removeEventListener("load", checkVisibility);
     };
   }, []);
 

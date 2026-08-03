@@ -3,12 +3,40 @@ import { FaBriefcase, FaDownload, FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerA
 import contactBackground from "../assets/contact-D1GBtYVB.avif";
 import { usePortfolio } from "../context/PortfolioContext";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const getApiBaseUrl = () => {
+  const configuredValue = import.meta.env.VITE_API_URL?.trim();
+  if (!configuredValue) {
+    return import.meta.env.PROD ? "" : "http://localhost:5000";
+  }
+
+  if (/your[-_ ]?render[-_ ]?backend[-_ ]?url|your-backend-url|example\.com/i.test(configuredValue)) {
+    return "";
+  }
+
+  try {
+    const url = new URL(configuredValue.includes("://") ? configuredValue : `https://${configuredValue}`);
+    return url.origin;
+  } catch {
+    return "";
+  }
+};
+
+const API_URL = getApiBaseUrl();
 
 const canPostToServer = () => {
-  if (import.meta.env.VITE_API_URL) return true;
   if (typeof window === "undefined") return false;
-  return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return true;
+  return Boolean(API_URL);
+};
+
+const openMailFallback = (profileEmail, formValues, setStatus) => {
+  const subject = encodeURIComponent(`Portfolio message from ${formValues.name}`);
+  const body = encodeURIComponent(`${formValues.message}\n\nFrom: ${formValues.name} <${formValues.email}>`);
+  window.location.href = `mailto:${profileEmail}?subject=${subject}&body=${body}`;
+  setStatus({
+    type: "info",
+    message: "The contact server is unavailable right now, so I opened your mail app instead.",
+  });
 };
 
 function Contact() {
@@ -29,14 +57,13 @@ function Contact() {
     setStatus({ type: "", message: "" });
 
     if (!canPostToServer()) {
-      const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
-      const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} <${form.email}>`);
-      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+      openMailFallback(profile.email, form, setStatus);
       setSubmitting(false);
       return;
     }
     try {
-      const response = await fetch(`${API_URL}/contact`, {
+      const endpoint = API_URL ? `${API_URL}/contact` : "/api/contact";
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -51,18 +78,16 @@ function Contact() {
         const serverMsg = result.message || "Failed to send message.";
         setStatus({ type: "error", message: serverMsg });
 
-        // If server reports email service is not configured, fallback to mailto automatically
-        if (serverMsg.toLowerCase().includes("email service is not configured")) {
-          const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
-          const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} <${form.email}>`);
-          window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+        if (
+          serverMsg.toLowerCase().includes("email service is not configured") ||
+          serverMsg.toLowerCase().includes("could not reach") ||
+          serverMsg.toLowerCase().includes("failed to send")
+        ) {
+          openMailFallback(profile.email, form, setStatus);
         }
       }
     } catch {
-      setStatus({
-        type: "error",
-        message: "Could not reach the server. You can email me directly instead.",
-      });
+      openMailFallback(profile.email, form, setStatus);
     } finally {
       setSubmitting(false);
     }
