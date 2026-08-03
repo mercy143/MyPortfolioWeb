@@ -3,22 +3,20 @@ import { portfolioData as localData, portfolioAssets } from "../data/portfolio";
 
 const PortfolioContext = createContext(null);
 
+const DEFAULT_API_URL = "https://my-portfolio-backend-ma41.onrender.com";
+
 const getApiBaseUrl = () => {
   const configuredValue = import.meta.env.VITE_API_URL?.trim();
-  if (!configuredValue) {
-    return import.meta.env.PROD ? "" : "http://localhost:5000";
+  if (configuredValue && !/your[-_ ]?render[-_ ]?backend[-_ ]?url|your-backend-url|example\.com/i.test(configuredValue)) {
+    try {
+      const url = new URL(configuredValue.includes("://") ? configuredValue : `https://${configuredValue}`);
+      return url.origin;
+    } catch {
+      return import.meta.env.PROD ? DEFAULT_API_URL : "http://localhost:5000";
+    }
   }
 
-  if (/your[-_ ]?render[-_ ]?backend[-_ ]?url|your-backend-url|example\.com/i.test(configuredValue)) {
-    return "";
-  }
-
-  try {
-    const url = new URL(configuredValue.includes("://") ? configuredValue : `https://${configuredValue}`);
-    return url.origin;
-  } catch {
-    return "";
-  }
+  return import.meta.env.PROD ? DEFAULT_API_URL : "http://localhost:5000";
 };
 
 const API_URL = getApiBaseUrl();
