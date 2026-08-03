@@ -47,6 +47,13 @@ if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
   console.warn("Email not configured: set SMTP_USER/SMTP_PASS or EMAIL_USER/EMAIL_PASS in environment. The contact form will return an error until configured.");
 }
 
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    ok: true,
+    message: "API server is running. Use /health, /api/portfolio, or POST /contact.",
+  });
+});
+
 app.get("/api/portfolio", (_req, res) => {
   res.json(portfolioData);
 });
