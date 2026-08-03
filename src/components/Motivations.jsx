@@ -28,50 +28,72 @@ function Motivations() {
     return () => observer.disconnect();
   }, [motivations.points.length]);
 
+  const introParagraphs = motivations.intro.split("\n\n").filter(Boolean);
+
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col items-center py-20 px-6">
+    <div className="relative flex min-h-screen flex-col items-center overflow-hidden px-6 py-20">
       <img
         src={assets.motivationBg}
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-slate-900/55" aria-hidden="true" />
+      <div className="absolute inset-0 bg-slate-900/60" aria-hidden="true" />
 
-      <div className="relative z-10 w-full flex flex-col items-center">
-        <h2 className="text-4xl font-bold text-center text-white mb-6">What Drives Me 🚀</h2>
-        <p className="text-lg text-slate-200 text-center mb-12 max-w-3xl mx-auto animate-fadeIn">
-          {motivations.intro}
-        </p>
+      <div className="relative z-10 flex w-full flex-col items-center">
+        <h2 className="mb-6 text-center text-4xl font-bold text-white">What Drives Me 🚀</h2>
+        <div className="mb-10 flex max-w-3xl flex-col gap-3 text-center text-lg text-slate-200 animate-fadeIn">
+          {introParagraphs.map((paragraph, index) => (
+            <p key={`${paragraph.slice(0, 20)}-${index}`}>{paragraph}</p>
+          ))}
+        </div>
 
-        <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12">
-          <ul className="space-y-6">
+        <div className="grid w-full max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <ul className="grid gap-4 md:gap-5">
             {motivations.points.map((point, idx) => (
               <li
                 key={point.text}
                 ref={(el) => (cardRefs.current[idx] = el)}
                 data-idx={idx}
-                className={`flex items-center gap-4 p-6 rounded-2xl shadow-lg transform transition duration-700 ${
+                className={`group flex items-start gap-4 rounded-[1.5rem] border border-white/15 p-5 shadow-xl backdrop-blur-sm transition-all duration-700 ${
                   visibleCards.includes(idx.toString())
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                } hover:-translate-y-2 hover:shadow-2xl bg-gradient-to-r ${point.gradient}`}
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                } hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 bg-gradient-to-br ${point.gradient}`}
               >
-                <span className="text-3xl w-14 h-14 flex items-center justify-center rounded-full bg-white text-gray-800 shadow-md">
-                  {getMotivationIcon(point.icon)}
-                </span>
-                <span className="text-lg font-medium text-white">{point.text}</span>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 text-slate-800 shadow-md">
+                  <span className="text-xl transition-transform duration-500 group-hover:rotate-6">
+                    {getMotivationIcon(point.icon)}
+                  </span>
+                </div>
+                <div className="min-w-0">
+                  <div className="mb-1 flex items-center gap-3">
+                    <span className="text-sm font-semibold uppercase tracking-[0.35em] text-white/80">
+                      0{idx + 1}
+                    </span>
+                    <span className="text-lg font-semibold text-white">{point.text}</span>
+                  </div>
+                  {point.description && (
+                    <p className="text-sm leading-6 text-slate-100/90">{point.description}</p>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
 
-          <div className="flex justify-center items-start">
+          <div className="flex items-start justify-center">
             <img
               src={assets.motivationImg}
               alt="Growth Motivation"
-              className="max-w-full h-auto rounded-2xl shadow-lg ring-1 ring-white/20 transition-transform transform hover:scale-105 hover:shadow-2xl hover:brightness-110 duration-500"
+              className="h-auto w-full max-w-[420px] rounded-[1.75rem] object-cover shadow-2xl ring-1 ring-white/20 transition-transform duration-500 hover:scale-[1.02] hover:brightness-110"
             />
           </div>
+        </div>
+
+        <div className="mt-12 max-w-3xl text-center">
+          <p className="text-xl italic text-slate-100/95">
+            “Technology is most valuable when it solves real problems and empowers people. That is the kind of software I strive to build every day.”
+          </p>
         </div>
       </div>
 

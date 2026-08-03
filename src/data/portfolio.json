@@ -5,7 +5,11 @@
     "title": "AI Engineer • Full Stack Developer • Data Engineer",
     "tagline": "I design and build intelligent AI applications, scalable backend systems, and modern web platforms using Python, FastAPI, Next.js, React, and Machine Learning. Passionate about Data Engineering, LLMs, and Cloud Technologies.",
     "email": "guashberhe2019@gmail.com",
-    "phone": "+251932330844"
+    "phone": "+251932330844",
+    "location": "Addis Ababa, Ethiopia",
+    "availability": "Open to AI • Full Stack • Data Roles",
+    "responseTime": "Typically responds within 24 hours to collaboration and hiring inquiries.",
+    "resumeUrl": "guash-berhe-cv.docx"
   },
   "nav": [
     { "name": "Home", "id": "home" },
@@ -288,16 +292,17 @@
     ]
   },
   "motivations": {
-    "intro": "I am passionate about building intelligent software solutions that solve real-world problems. My motivation comes from continuous learning, creating meaningful technology, and making a positive impact through Artificial Intelligence, Full-Stack Development, and Data Engineering.",
+    "intro": "I am passionate about building intelligent software solutions that solve real-world problems.\n\nMy motivation comes from continuous learning, creating meaningful technology, and making a positive impact through Artificial Intelligence, Full-Stack Development, and Data Engineering.",
     "points": [
-      { "text": "Building innovative AI solutions that create real-world impact", "icon": "FaBrain", "gradient": "from-purple-500 to-indigo-500" },
-      { "text": "Developing software that improves people's lives", "icon": "FaLaptopCode", "gradient": "from-emerald-400 to-teal-500" },
-      { "text": "Continuously learning new technologies and industry best practices", "icon": "FaBookOpen", "gradient": "from-sky-400 to-cyan-500" },
-      { "text": "Collaborating with talented engineers and diverse teams", "icon": "FaUsers", "gradient": "from-yellow-400 to-orange-500" },
-      { "text": "Solving complex technical challenges with creative solutions", "icon": "FaLightbulb", "gradient": "from-pink-400 to-rose-500" },
-      { "text": "Growing into an AI Engineer and Data Engineer", "icon": "FaChartLine", "gradient": "from-cyan-400 to-blue-500" },
-      { "text": "Contributing to open-source projects and the developer community", "icon": "FaCodeBranch", "gradient": "from-lime-400 to-emerald-500" },
-      { "text": "Delivering scalable, reliable, and high-quality software", "icon": "FaShieldAlt", "gradient": "from-slate-400 to-slate-600" }
+      { "text": "Building AI solutions that deliver measurable impact", "description": "I enjoy turning bold ideas into practical products that create value for users and businesses.", "icon": "FaBrain", "gradient": "from-purple-600 via-violet-600 to-indigo-700" },
+      { "text": "Developing software that solves meaningful real-world problems", "description": "My work is driven by creating tools that are useful, reliable, and genuinely helpful.", "icon": "FaLaptopCode", "gradient": "from-emerald-500 via-teal-500 to-cyan-600" },
+      { "text": "Continuously learning new technologies and best practices", "description": "I stay curious by exploring modern tools, architectures, and engineering habits every week.", "icon": "FaBookOpen", "gradient": "from-sky-500 via-cyan-500 to-blue-600" },
+      { "text": "Collaborating with talented engineers and diverse teams", "description": "Strong teams create stronger products, and I value thoughtful collaboration deeply.", "icon": "FaUsers", "gradient": "from-amber-500 via-orange-500 to-rose-500" },
+      { "text": "Solving complex engineering challenges through creativity", "description": "I like breaking down difficult problems into clear, scalable, and elegant solutions.", "icon": "FaLightbulb", "gradient": "from-pink-500 via-fuchsia-500 to-purple-600" },
+      { "text": "Becoming an AI & Data Engineer capable of building intelligent systems", "description": "I am growing toward creating end-to-end solutions that connect data, models, and product experience.", "icon": "FaChartLine", "gradient": "from-cyan-500 via-blue-500 to-indigo-600" },
+      { "text": "Contributing to open-source projects and the developer community", "description": "I believe knowledge grows faster when it is shared openly and generously.", "icon": "FaCodeBranch", "gradient": "from-lime-500 via-emerald-500 to-green-600" },
+      { "text": "Creating software that empowers people and businesses", "description": "The best technology is the kind that helps others move faster, think smarter, and perform better.", "icon": "FaProjectDiagram", "gradient": "from-blue-500 via-sky-500 to-cyan-600" },
+      { "text": "Delivering scalable, reliable, and high-quality software", "description": "I care about maintainability, clarity, and long-term impact as much as launch speed.", "icon": "FaShieldAlt", "gradient": "from-slate-500 via-slate-600 to-slate-700" }
     ]
   },
   "socials": [

@@ -121,7 +121,7 @@ function Home() {
                 View Projects <FaArrowRight />
               </button>
               <a
-                href="/guash-berhe-cv.txt"
+                href="guash-berhe-cv.docx"
                 download
                 className="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-6 py-3 font-semibold text-white shadow-md backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/20"
               >
