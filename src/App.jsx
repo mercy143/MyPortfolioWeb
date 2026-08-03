@@ -26,11 +26,12 @@ function App() {
           <section id="about">
             <About />
           </section>
-          <section id="skill">
-            <Skill />
-          </section>
+          
           <section id="journey">
             <Journey />
+          </section>
+          <section id="skill">
+            <Skill />
           </section>
           <section id="hobby">
             <Hobby />

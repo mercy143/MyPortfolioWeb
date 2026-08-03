@@ -38,7 +38,7 @@ function Motivations() {
         className="absolute inset-0 h-full w-full object-cover"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-slate-900/60" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.22),_transparent_36%),linear-gradient(135deg,_rgba(2,6,23,0.92),_rgba(85,28,25,0.75))]" aria-hidden="true" />
 
       <div className="relative z-10 flex w-full flex-col items-center">
         <h2 className="mb-6 text-center text-4xl font-bold text-white">What Drives Me 🚀</h2>
@@ -55,11 +55,11 @@ function Motivations() {
                 key={point.text}
                 ref={(el) => (cardRefs.current[idx] = el)}
                 data-idx={idx}
-                className={`group flex items-start gap-4 rounded-[1.5rem] border border-white/15 p-5 shadow-xl backdrop-blur-sm transition-all duration-700 ${
+                className={`group flex items-start gap-4 rounded-[1.5rem] border border-sky-400/20 bg-slate-950/80 p-5 shadow-[0_15px_45px_rgba(2,8,23,0.35)] backdrop-blur-md transition-all duration-700 ${
                   visibleCards.includes(idx.toString())
                     ? "translate-y-0 opacity-100"
                     : "translate-y-10 opacity-0"
-                } hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 bg-gradient-to-br ${point.gradient}`}
+                } hover:-translate-y-2 hover:scale-[1.02] hover:border-sky-400/40 hover:shadow-[0_20px_60px_rgba(14,165,233,0.2)]`}
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/90 text-slate-800 shadow-md">
                   <span className="text-xl transition-transform duration-500 group-hover:rotate-6">
